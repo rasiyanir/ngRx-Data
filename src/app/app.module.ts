@@ -16,6 +16,7 @@ import { EntityDataModule, EntityDataService } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 import { HttpClientModule } from '@angular/common/http';
 import { PostDataService } from './posts/post-data.service';
+import { PostResolver } from './posts/posts.resolver';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { PostDataService } from './posts/post-data.service';
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
   ],
-  providers: [PostDataService],
+  providers: [PostDataService, PostResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {
