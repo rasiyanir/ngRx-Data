@@ -4,6 +4,7 @@ import { DefaultDataService, HttpUrlGenerator } from "@ngrx/data";
 import { Observable } from "rxjs";
 import { Post } from "../models/post.model";
 import { map } from "rxjs/operators";
+import { Update } from "@ngrx/entity";
 
 @Injectable()
 export class PostDataService extends DefaultDataService<Post>{
@@ -30,5 +31,20 @@ export class PostDataService extends DefaultDataService<Post>{
         return { ...post, id: data.name};
       })
     );
+  }
+
+  update(post: Update<Post>): Observable<Post> {
+      return this.http
+      .put<Post>(
+        `https://ngrx-demo-authentication-default-rtdb.firebaseio.com/posts/${post.id}.json`, {...post.changes}
+      );
+  }
+
+  delete(id: string): Observable<string> {
+      return this.http.delete<string>(`https://ngrx-demo-authentication-default-rtdb.firebaseio.com/posts/${id}.json`).pipe(
+        map((data) => {
+          return id;
+        })
+      );
   }
 }

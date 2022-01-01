@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'posts', component: PostsListComponent, resolve: {posts: PostResolver}},
   { path: 'posts/add', component: AddPostComponent},
-  { path: 'posts/edit/:id', component: EditPostComponent},
-  { path: 'posts/details/:id', component: SinglePostComponent},
+  { path: 'posts/edit/:id', component: EditPostComponent, resolve: {posts: PostResolver}},
+  { path: 'posts/details/:id', component: SinglePostComponent, resolve: {posts: PostResolver}},
 ];
 
 @NgModule({
