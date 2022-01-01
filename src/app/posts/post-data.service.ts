@@ -22,4 +22,13 @@ export class PostDataService extends DefaultDataService<Post>{
       return posts;
     }))
   }
+
+  add(post: Post): Observable<Post>{
+    return this.http.post<{name: string}>(`https://ngrx-demo-authentication-default-rtdb.firebaseio.com/posts.json`, post)
+    .pipe(
+      map((data) => {
+        return { ...post, id: data.name};
+      })
+    );
+  }
 }
